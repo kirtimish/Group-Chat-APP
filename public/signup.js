@@ -1,28 +1,30 @@
 
-function signup(event) {
+async function signUp(event) {
+    event.preventDefault();
+
     const username = event.target.username.value;
     const email = event.target.emailId.value;
     const phoneNumber = event.target.phoneNumber.value;
     const password = event.target.password.value;
 
-    const userObj = {
+    const obj = {
         username,
         email,
         phoneNumber,
         password
     }
 
-    console.log(userObj);
+    console.log(obj.email);
 
-    axios.post('http://localhost:3000/user/signup', userObj)
-    .then(res => {
+    try {
+        const res = await axios.post('http://localhost:3000/user/signup',obj)
         if(res.status === 201){
-            console.log(res);
-        } else {
-            console.log('sigup unsuccessfull')
+            alert('User created succesfully')
+        }  else if(res.status === 207){
+            alert(res.data.message);
         }
-    })
-    .catch(err => {
-        console.log('something went wrong', err)
-    })
+        
+    } catch (error) {
+        console.log(error, "error came")
+    }
 }
