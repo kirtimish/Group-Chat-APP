@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="chat.css" >
+    <title>Chat Now | Login</title>
+</head>
+<body> 	
+
+        <div class="chatBox">
+            <h2>Chat Now</h2>
+            <form onsubmit="chat(event)">
+                <input type="text" name="chats" id="message"  required/>
+                <button type="submit" id="text">send</button>
+            </form>
+        </div>
+
+
+    <div id="chats-Display"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="./chat.js"></script>
+</body>
+</html>

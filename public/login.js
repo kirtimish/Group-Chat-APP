@@ -17,7 +17,7 @@ async function login(event) {
 
     try {
         const res = await axios.post('http://localhost:3000/user/login',obj)
-        alert(res.data.success);
+        window.location.href = './chat.html'
     } catch (error) {
         console.log(error)
     }
