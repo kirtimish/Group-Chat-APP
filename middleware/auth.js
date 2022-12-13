@@ -3,7 +3,7 @@ const User = require('../models/user')
 
 const authenticate = async (req,res,next) => {
     try {
-        const token = req.headers('Authorization')
+        const token = req.header('Authorization')
         console.log(token)
 
         const user = jwt.verify(token,'sectoauchapp')
