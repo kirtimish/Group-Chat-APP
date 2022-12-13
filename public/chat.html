@@ -9,17 +9,17 @@
     <title>Chat Now | Login</title>
 </head>
 <body> 	
-
-        <div class="chatBox">
-            <h2>Chat Now</h2>
+    <div class="header">
+        <h2>Chat Now</h2>
+        <div id="chats-Display"></div>
+    </div>
+       
+    <div class="chatBox">
             <form onsubmit="chat(event)">
-                <input type="text" name="chats" id="message"  required/>
-                <button type="submit" id="text">send</button>
+                <input type="text" name="chats" id="message"  required/> <button type="submit" id="text">send</button>
             </form>
-        </div>
+    </div>
 
-
-    <div id="chats-Display"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script src="./chat.js"></script>

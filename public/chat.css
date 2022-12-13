@@ -8,18 +8,22 @@ body{
 	font-family: 'Jost', sans-serif;
 	background: rgb(1, 37, 15);
 }
-.main{
-	width: 350px;
-	height: 500px;
-	background: red;
-	overflow: hidden;
-	background: linear-gradient(to bottom, #0e2e16, #337547, #588f54);	
-    border-radius: 10px;
-	box-shadow: 5px 20px 50px #000;
+
+.header {
+    position: absolute;
+    top: 0;
+    color: #fff;
+}
+
+.chatBox {
+    position: absolute;
+    bottom: 0;
+    display: inline-block;
+
 }
 
 input{
-	width: 60%;
+	width: 600px;
 	height: 20px;
 	background: #e0dede;
 	justify-content: center;
@@ -31,13 +35,13 @@ input{
 	border-radius: 5px;
 }
 button{
-	width: 60%;
+	width: 20%;
 	height: 40px;
 	margin: 10px auto;
 	justify-content: center;
 	display: block;
-	color: #fff;
-	background: rgb(1, 37, 15);
+	color: rgb(7, 80, 13);
+	background: rgb(247, 253, 250);
 	font-size: 1em;
 	font-weight: bold;
 	margin-top: 20px;
@@ -48,6 +52,6 @@ button{
 	cursor: pointer;
 }
 button:hover{
-	background: #fff;
-    color: #0e2e16;
+	background: #0e2e16;
+    color: #fff;
 }

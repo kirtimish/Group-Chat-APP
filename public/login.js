@@ -17,6 +17,7 @@ async function login(event) {
 
     try {
         const res = await axios.post('http://localhost:3000/user/login',obj)
+        localStorage.setItem('token',res.data.token)
         window.location.href = './chat.html'
     } catch (error) {
         console.log(error)
