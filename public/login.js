@@ -2,7 +2,7 @@
 async function login(event) {
     event.preventDefault();
 
-    const email = event.target.email.value;
+    const email = event.target.emailId.value;
     const password = event.target.password.value;
 
     const obj = {
@@ -10,11 +10,14 @@ async function login(event) {
         password
     }
 
+    email.value = '';
+    password.value = '';
+    
     console.log(obj.email);
 
     try {
         const res = await axios.post('http://localhost:3000/user/login',obj)
-        console.log(res)
+        alert(res.data.success);
     } catch (error) {
         console.log(error)
     }
