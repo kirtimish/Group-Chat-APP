@@ -1,9 +1,10 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../util/database')
 
-const Message = sequelize.define('message', {
+const Chat = sequelize.define('chat', {
     id: {
         type: Sequelize.INTEGER,
+        unique: true,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
@@ -14,4 +15,4 @@ const Message = sequelize.define('message', {
     }
 })
 
-module.exports = Message;
+module.exports = Chat;

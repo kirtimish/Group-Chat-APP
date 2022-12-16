@@ -1,4 +1,4 @@
-const Message = require('../models/nessage')
+const Chat = require('../models/chat')
 const User = require('../models/user')
 
 exports.createMessage = async (req,res,next) => {
@@ -7,7 +7,7 @@ exports.createMessage = async (req,res,next) => {
     console.log(message)
 
     try {
-        const messageCreated = await Message.create({
+        const messageCreated = await Chat.create({
             message: message,
             userId: req.user.id
         })
@@ -20,9 +20,19 @@ exports.createMessage = async (req,res,next) => {
 }
 
 exports.getMessage = async (req,res,next) => {
+    let msgId = req.query.msg;
     try {
-        const message = await Message.findAll({ include : [ {model: User, required: false} ]})
-        res.status(201).json({success:true, data: message})
+        
+        const data = await req.user.getChats();
+        console.log(data.length)
+
+        let index = data.findIndex(Chat => Chat.id == msgId)
+
+        let messageTobeSend = data.slice(index+1)
+
+        let username = await req.user.username;
+        
+        res.status(201).json({success:true, messageTobeSend,username})
         
     } catch (error) {
         res.status(500).json({message:"failed"})
