@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/signup', userControllers.Signup)
 router.post('/login', userControllers.login)
 
-router.post('/chatNow', userAuthentication.authenticate, chatControllers.createMessage)
-router.get('/getChats', userAuthentication.authenticate, chatControllers.getMessage)
+// router.post('/chatNow', userAuthentication.authenticate, chatControllers.createMessage)
+// router.get('/getChats', userAuthentication.authenticate, chatControllers.getMessage)
 
 module.exports = router;

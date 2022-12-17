@@ -9,16 +9,107 @@
     <title>Chat Now | Login</title>
 </head>
 <body> 	
-    <div class="header">
-        <h2>Chat Now</h2>
-        <div id="chats-Display"></div>
-    </div>
-       
-    <div class="chatBox">
-            <form onsubmit="chat(event)">
-                <input type="text" name="chats" id="message"  required/> <button type="submit" id="text">send</button>
+  <div class="page">
+    
+    <div class="screen-container">
+
+      <div class="chat">
+        <div class="chat-container">
+          <div class="user-bar">
+            <div class="back">
+              <i class="zmdi zmdi-arrow-left"></i>
+            </div>
+            <div class="avatar">
+              <img src="https://scontent.fpnq1-1.fna.fbcdn.net/v/t39.30808-1/311467854_1755002154857501_7419641158350127624_n.jpg?stp=dst-jpg_p240x240&_nc_cat=107&ccb=1-7&_nc_sid=7206a8&_nc_ohc=HIDYQgzRUiUAX9kL043&_nc_ht=scontent.fpnq1-1.fna&oh=00_AfCK-NL5iIwrkffFEigqn6B0QfjGhwum1b2SsRsKo1CvgQ&oe=636CF937" alt="Avatar" width="36" height="36">
+            </div>
+            <div class="name">
+              <span>Iliyas</span>
+              <span class="status">online</span>
+            </div>
+
+            <div class="logout-div">
+                <button id="logout" type="button">LogOut</button>
+              </div>
+            
+          </div>
+
+
+
+          <div class="left">
+            <div class ='create-group' id="add-user">
+              <form onsubmit="addingUser(event)" id="form-group">
+                <div >
+                  <input type="email" name="email" class="groupName" placeholder="search by email" autocomplete="off">
+                  <input type="submit" value="+" class="add-btn">
+                </div>
+              </form>
+            </div>
+            <div class="groups" style="border-right: 1px solid #373f44;" id="group">
+            <!--  <div style="width:100%;color:white" class="group-style">
+                <button class="user-btn">User 1</button>
+                <button class="add-user">+</button>
+                <button class="remove-user">-</button>
+                <button class="delete-group">r</button>
+              </div>-->
+            </div>
+    
+          </div>
+
+          
+
+         
+        <div class="chat-container-div">  
+          <div class="msg-div">
+            <div class="resize-received">
+              <div class="received">
+              <p class="received-name">Shrey</p>
+              <p class="received-msg">Hey</p>
+              <p class="received-time">7:00pm</p>
+          </div>
+            </div>
+          </div>
+
+          <div class="msg-div">
+            <div class="sent">
+              <p class="sent-name">You</p>
+              <p class="sent-msg">Hello Bro</p>
+              <p class="sent-time">7:15pm</p>
+             
+            </div>
+          </div>
+
+          <div class="msg-div">
+              <div class="resize-sent">
+            <div class="sent">
+              <p class="sent-name">You</p>
+              <p class="sent-msg">How are you?</p>
+              <p class="sent-time">10:01pm</p>
+             
+            </div>
+          </div>
+          </div>
+
+          <div class="msg-div">
+              <div class="resize-received">
+              <div class="received">
+                <p class="received-name">Shrey</p>
+                <p class="received-msg">Good! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, voluptates quod ratione obcaecati accusantium ipsa error, perspiciatis eum aliquam culpa molestias, vero sunt magnam maxime quos eligendi ab non! Ducimus?</p>
+                <p class="received-time">10:02pm</p>
+              </div>
+          </div>
+          </div>
+          </div>
+
+          <div >
+            <form onsubmit="Send(event)" class="style-form" id ="chat-form">
+                <input type="text" name="message" placeholder="Type something ...." autocomplete="off">
+                <input type="submit" value="send" >
             </form>
-    </div>
+        </div>
+      </div>
+
+  </div>
+  <div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
