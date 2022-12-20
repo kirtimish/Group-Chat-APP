@@ -2,15 +2,15 @@
 async function signUp(event) {
     event.preventDefault();
 
-    const username = event.target.username.value;
-    const email = event.target.emailId.value;
-    const phoneNumber = event.target.phoneNumber.value;
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const phone = event.target.phone.value;
     const password = event.target.password.value;
 
     const obj = {
-        username,
+        name,
         email,
-        phoneNumber,
+        phone,
         password
     }
 

@@ -8,6 +8,10 @@ const Usergroup = sequelize.define('usergroup', {
         unique: true,
         autoIncrement: true,
         allowNull: false
+    },
+    isAdmin: {
+        type: Sequelize.BOOLEAN,
+        default: false
     }
 })
 
