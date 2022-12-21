@@ -6,7 +6,7 @@ const authenticate = async (req,res,next) => {
         const token = req.header('Authorization')
         console.log(token)
 
-        const user = jwt.verify(token,'sectoauchapp')
+        const user = jwt.verify(token,process.env.JWT_SECRET)
         console.log(user.userId);
 
         const getUser = await User.findByPk(user.userId)
