@@ -3,7 +3,7 @@ const name = localStorage.getItem('name');
 const userId = localStorage.getItem('userId');
 
 const authAxios = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL: "http://18.234.127.40:3000",
     headers: { Authorization: token },
   });
 
