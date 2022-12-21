@@ -2,10 +2,6 @@ const token = localStorage.getItem('token');
 const name = localStorage.getItem('name');
 const userId = localStorage.getItem('userId');
 
-const authAxios = axios.create({
-    baseURL: "http://18.234.127.40:3000",
-    headers: { Authorization: token },
-  });
 
   //top-display 
 
@@ -30,7 +26,7 @@ const authAxios = axios.create({
       //event.preventDefault();
       try {
           const name = document.getElementById("create-group-input").value;
-      const res = await authAxios.post('/create-group', {name, isAdmin:true});
+      const res = await axios.post('http://18.234.127.40:3000/create-group', {name, isAdmin:true}, {headers: { "Authorization": token }});
       //console.log('>>GrouP ID', res.data.group.id);
       const groupId = res.data.group.id;
       localStorage.setItem('groupId', groupId);
@@ -41,8 +37,8 @@ const authAxios = axios.create({
       
     }
 
-    authAxios
-  .get("/get-groups")
+    axios
+  .get("http://18.234.127.40:3000/get-groups", {headers: { "Authorization": token }})
   .then((res) => {
     //getting groups
     const groupListDiv = document.getElementById("group-list");
@@ -86,8 +82,8 @@ const authAxios = axios.create({
     if (localStorage.getItem("groupId") != null) {
       console.log('***********', lastId)
        //setInterval(() => {
-      authAxios
-        .get(`/get-chats?id=${lastId}&gId=${groupId}`)
+      axios
+        .get(`http://18.234.127.40:3000/get-chats?id=${lastId}&gId=${groupId}`, {headers: { "Authorization": token }})
         .then((response) => {
           console.log('*******RESP', response)
         
@@ -124,8 +120,8 @@ const authAxios = axios.create({
           groupId: localStorage.getItem("groupId"),
         };
         console.log(obj);
-        authAxios
-          .post("/post-chat", obj)
+        axios
+          .post("http://18.234.127.40:3000/post-chat", obj, {headers: { "Authorization": token }})
           .then((res) => console.log(res))
           .catch((err) => console.log(err));
         document.getElementById("group-chat-input").value = "";
@@ -152,8 +148,8 @@ const authAxios = axios.create({
         const gId= e.target.parentNode.id;
         console.log(gId)
         if (confirm("Are you sure?")) {
-          authAxios
-            .delete(`/delete-group/${gId}`)
+          axios
+            .delete(`http://18.234.127.40:3000/delete-group/${gId}`, {headers: { "Authorization": token }})
             .then((res) => {
               console.log(res.data);
               localStorage.removeItem("groupId");
@@ -166,8 +162,8 @@ const authAxios = axios.create({
       if (e.target.id === "show-users") {
         document.getElementById('user-list').style.display = 'block';
         const gId= e.target.parentNode.id;
-        authAxios
-          .get(`/get-users/?gId=${gId}`)
+        axios
+          .get(`http://18.234.127.40:3000/get-users/?gId=${gId}`, {headers: { "Authorization": token }})
           .then((res) => {
             // console.log(res.data);
             document.getElementById("users-inside-group").innerHTML = "";
@@ -192,8 +188,8 @@ const authAxios = axios.create({
         };
         console.log(obj);
         if (confirm("Are you sure?")) {
-          authAxios
-            .post("/remove-user", obj)
+          axios
+            .post("http://18.234.127.40:3000/remove-user", obj, {headers: { "Authorization": token }})
             .then((res) => {
               console.log(res.data);
               alert(`user with ${obj.email} has been removed from the group`);
@@ -211,8 +207,8 @@ const authAxios = axios.create({
             groupId: e.target.parentNode.id
         }
         // console.log(obj)
-        authAxios
-          .post("/make-admin", obj)
+        axios
+          .post("http://18.234.127.40:3000/make-admin", obj, {headers: { "Authorization": token }})
           .then((res) => {
             console.log(res);
           })
@@ -220,8 +216,8 @@ const authAxios = axios.create({
       }
 
       if (e.target.id === "add-user-btn") {
-        authAxios
-    .get("/get-users")
+        axios
+    .get("http://18.234.127.40:3000/get-users", {headers: { "Authorization": token }})
     .then((res) => {
       // getting users
       // console.log(res.data);
@@ -264,8 +260,8 @@ const authAxios = axios.create({
       };
       // console.log(obj);
       if (e.target.id === "add-user-btn") {
-        authAxios
-          .post("/add-user", obj)
+        axios
+          .post("http://18.234.127.40:3000/add-user", obj, {headers: { "Authorization": token }})
           .then((res) => {
             console.log(res.data);
             alert(`user with ${email} added to the group`);
