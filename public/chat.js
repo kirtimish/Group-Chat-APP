@@ -50,10 +50,11 @@ const authAxios = axios.create({
     res.data.groups.forEach((group) => {
       groupListDiv.innerHTML += `
           <li id="${group.id}" style="padding:5px 0;">
-          <span>${group.name}</span>
+          <span style="color: white;">${group.name}</span>
           <button id="show-users">Show Users</button>
           <button id="change-group-btn" class="group-btn">Enter Chat</button>
           <button id="delete-group-btn" class="group-btn">Delete Group</button>
+          <button id="add-user-btn">Add-Users</button>
           </li>
           `;
     });
@@ -129,7 +130,7 @@ const authAxios = axios.create({
           .catch((err) => console.log(err));
         document.getElementById("group-chat-input").value = "";
         document.getElementById("group-chat-receive-box").innerHTML += `
-                  <div><span style="color:green;"><b>${name}:</b></span><span>${input}</span></div>`;
+                  <div class="chat-span"><span ><b>${name}:</b></span><span>${input}</span></div>`;
       }
     }
   
@@ -163,6 +164,7 @@ const authAxios = axios.create({
       }
 
       if (e.target.id === "show-users") {
+        document.getElementById('user-list').style.display = 'block';
         const gId= e.target.parentNode.id;
         authAxios
           .get(`/get-users/?gId=${gId}`)
@@ -172,9 +174,9 @@ const authAxios = axios.create({
             res.data.userData.forEach((user) => {
               document.getElementById("users-inside-group").innerHTML += `
                         <li id="${user.groups[0].id}">
-                            <span>${user.name}</span>
-                            <span>${user.email}</span>
-                            <span>${user.groups[0].usergroup.isAdmin}</span>
+                            <span style="color: white;">${user.name}</span>
+                            <span style="color: white;">${user.email}</span>
+                            <span style="color: white;">${user.groups[0].usergroup.isAdmin}</span>
                             <button id="remove-user-btn" class="user-btn">Remove</button>
                             <button id="make-admin-btn">Make Admin</button>
                         </li> `;
@@ -216,6 +218,29 @@ const authAxios = axios.create({
           })
           .catch((err) => console.log(err));
       }
+
+      if (e.target.id === "add-user-btn") {
+        authAxios
+    .get("/get-users")
+    .then((res) => {
+      // getting users
+      // console.log(res.data);
+      const userListDiv = document.getElementById("user-list");
+      userListDiv.style.display = 'block';
+      userListDiv.innerHTML = "";
+      res.data.user.forEach((user) => {
+        userListDiv.innerHTML += `
+            <li id='user-${user.id}' class="user-list-inside" style="padding:5px 0;" user-list-li>
+            <span style="color: white;">${user.name}</span>
+            <span style="color: white;">${user.email}</span>
+            <label for="accept">Admin</label>
+            <input type="checkbox" id="accept">
+            <button id="add-user-btn" class="user-btn">Add</button>
+            </li> `;
+      });
+    })
+    .catch((err) => console.log(err.response));
+      }
     });
 
     //USERS FUNCTIONALITY
@@ -252,45 +277,27 @@ const authAxios = axios.create({
       }
     });
  
-    authAxios
-    .get("/get-users")
-    .then((res) => {
-      // getting users
-      // console.log(res.data);
-      const userListDiv = document.getElementById("user-list");
-      userListDiv.innerHTML = "";
-      res.data.user.forEach((user) => {
-        userListDiv.innerHTML += `
-            <li id='user-${user.id}' class="user-list-inside" style="padding:5px 0;" user-list-li>
-            <span>${user.name}</span>
-            <span>${user.email}</span>
-            <label for="accept">Admin</label>
-            <input type="checkbox" id="accept">
-            <button id="add-user-btn" class="user-btn">Add</button>
-            </li> `;
-      });
-    })
-    .catch((err) => console.log(err.response));
+    
 
 
-    /* For searching in user list*/
-  document.querySelector("[data-search]").addEventListener("input", (e) => {
-    //search bar
-    const value = e.target.value.toLowerCase();
-    const userList = document.getElementById("user-list");
-    const li = userList.getElementsByTagName("li");
-    // console.log(li);
-    // console.log(Array.from(li));
-    Array.from(li).forEach((user) => {
-      const email = user.children[0].textContent;
-      const name = user.children[1].textContent;
-      if (
-        (email.toLowerCase().indexOf(value) ||
-          email.toLowerCase().indexOf(value)) !== -1
-      ) {
-        user.style.display = "block";
-      } else {
-        user.style.display = "none";
-      }
-    });
-  });
+  //   /* For searching in user list*/
+  // document.querySelector("[data-search]").addEventListener("input", (e) => {
+  //   //search bar
+  //   const value = e.target.value.toLowerCase();
+  //   const userList = document.getElementById("user-list");
+  //   const li = userList.getElementsByTagName("li");
+  //   // console.log(li);
+  //   // console.log(Array.from(li));
+  //   Array.from(li).forEach((user) => {
+  //     const email = user.children[0].textContent;
+  //     const name = user.children[1].textContent;
+  //     if (
+  //       (email.toLowerCase().indexOf(value) ||
+  //         email.toLowerCase().indexOf(value)) !== -1
+  //     ) {
+  //       user.style.display = "block";
+  //     } else {
+  //       user.style.display = "none";
+  //     }
+  //   });
+  // });

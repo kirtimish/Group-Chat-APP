@@ -10,12 +10,12 @@
 <body>
        <section id="top">
         <div>
-            <span style="font-size: large;"><b>Logged in as:</b></span>
-            <span id="login-name" style="font-size: large; font-weight: bold; color: rebeccapurple;"></span>
+            <span style="font-size: large; color: aliceblue;"><b>Logged in as:</b></span>
+            <span id="login-name" style="font-size: large; font-weight: bold; color: rgb(12, 172, 84);"></span>
         </div>
         <div>
-            <span style="font-size: large;"><b>Current Group:</b></span>
-            <span id="current-group-name" style="font-size: large; font-weight: bold; color: rebeccapurple;"></span>
+            <span style="font-size: large; color: aliceblue;"><b>Current Group:</b></span>
+            <span id="current-group-name" style="font-size: large; font-weight: bold; color: rgb(34, 207, 219);"></span>
         </div>
         <div id="logout-btn-div">
             <button id="logout-btn" onclick="logout()">Logout</button>
@@ -26,11 +26,11 @@
         <div class="group-list-container">
             <form onsubmit="createGroup(event)" class="create-group">
                 <input type="text" id="create-group-input" class="create-group-input" placeholder="Enter Group Name" required>
-                <button type="submit">Create</button>
+                <button type="submit" class="create-group-btn">Create</button>
             </form>
-            <h2>Group List</h2>
+            <h2>Your Groups</h2>
             <li>
-                <span>NAME</span>
+                <!-- <span>NAME</span> -->
                 <span></span>
                 <span></span>
                 <span></span>
@@ -38,20 +38,22 @@
             <hr>
             <div id="group-list-wrapper">
                 <div id="group-list" class="group-list"></div><hr>
-                <div id="users-inside-group"></div>
+                <div id="users-inside-group">
+                    <ul id="user-list"></ul>
+                </div>
             </div>
         </div>
         <div class="group-chat-container">
-            <h2>Group Chat</h2>
+            <h2 style="color: #fff;">Chat Window</h2>
             <div id="group-chat-receive-box" class="message-container"></div>
             <form onsubmit="sendGroupMsg(event)" id="group-chat-form" class="send-container">
                 <input type="text" id="group-chat-input" class="message-input" placeholder="Type your message" required>
-                <button type="submit" id="send-btn-group" class="send-btn">Send</button>
+                <button type="submit" id="send-btn-group" class="send-btn">-></button>
             </form>    
         </div> 
        </section>
 
-<ul id="user-list"></ul>
+
        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
        <script src="chat.js"></script>     
 </body>
