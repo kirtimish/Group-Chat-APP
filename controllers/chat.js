@@ -1,4 +1,5 @@
 const Chat = require('../models/chats');
+const S3Services = require('../services/s3Services')
 
 exports.postChat = (req, res) => {
     const { message, name, groupId } = req.body;
@@ -22,5 +23,19 @@ exports.getChats = async (req, res) => {
         res.status(200).json({ success: true, chat });
     } catch (err) {
         console.log(err)
+    }
+}
+
+exports.uploadFile = async(req,res) => {
+    try {
+        console.log(req.file)
+        const filename = `user-${req.user.id}/${req.file.filename}_${new Date()}.png`
+
+        console.log(filename)
+        const fileURL = await S3Services.uploadToS3(req.file.path, filename)
+        res.status(200).json({ success: true, fileURL})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json(error)
     }
 }

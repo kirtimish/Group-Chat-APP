@@ -272,6 +272,17 @@ const userId = localStorage.getItem('userId');
           });
       }
     });
+
+
+    function sendMedia() {
+      axios.post('http://18.234.127.40:3000/upload',{headers: { "Authorization": token }})
+      .then(res => {
+        console.log(res.data.fileURL)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
  
     
 
