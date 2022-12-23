@@ -13,6 +13,6 @@ router.post('/post-chat', authMiddleware.authenticate, chatcontroller.postChat);
 
 router.get('/get-chats', authMiddleware.authenticate, chatcontroller.getChats);
 
-router.post('/upload',authMiddleware.authenticate, upload.single('image'), chatcontroller.uploadFile);
+router.post('/upload', chatcontroller.uploadFile);
 
 module.exports = router;

@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
+const helmet = require('helmet')
+const morgan = require('morgan')
 
 //database
 const sequelize = require('./util/database');
@@ -24,6 +26,7 @@ app.use(cors({
     origin:'*',
     credentials:true
 }));
+app.use(helmet());
 
 app.use('/user',userRoutes);
 app.use(groupRoutes);

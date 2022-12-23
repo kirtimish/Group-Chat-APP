@@ -1,34 +1,48 @@
-const S3 = require('aws-sdk/clients/s3')
+const fs = require('fs');
+const AWS = require('aws-sdk');
+const { resolve } = require('path');
 
-const bucketName = process.env.BUCKET_NAME;
-const region = 'ap-northeast-1';
-const accessKeyId = process.env.ACCESS_KEY_ID;
-const secretaccessId = process.env.SECRET_KEY;
+const ID = process.env.ACCESS_KEY_ID;
+const SECRET = process.env.SECRET_KEY;
 
-//initialise instance of S3
-const s3 = new S3({
-    region,
-    accessKeyId,
-    secretaccessId
+// The name of the bucket that you have created
+const BUCKET_NAME = 'groupchatapp1';
+
+const s3 = new AWS.S3({
+    accessKeyId: ID,
+    secretAccessKey: SECRET
 });
 
-exports.uploadToS3 = (data,filename) =>{
-    const params = {
-        Bucket: bucketName,
-        Key: filename,
-        body: data,
-        ACL: 'public-read'
+const params = {
+    Bucket: process.env.BUCKET_NAME,
+    CreateBucketConfiguration: {
+        // Set your region here
+        LocationConstraint: "ap-northeast-1"
     }
+};
 
-    return new Promise((resolve,reject) => {
-        s3.upload(params,(err, s3response) => {
-            if(err) {
-                console.log(err)
-                reject(err)
-            } else {
-                console.log('success', s3response);
-                resolve(s3response.Location);
-            }
-        })
-    })
+const uploadFile = (fileName) => {
+    // Read content from the file
+    const fileContent = fs.readFileSync(fileName);
+
+    // Setting up S3 upload parameters
+    const params = {
+        Bucket: process.env.BUCKET_NAME,
+        Key: 'flower.jpg', // File name you want to save as in S3
+        Body: fileContent
+    };
+
+    // Uploading files to the bucket
+    s3.upload(params, function(err, data) {
+        if (err) {
+            throw err;
+        } else {
+            console.log(`File uploaded successfully. ${data.Location}`);
+        }
+       
+    });
+};
+
+module.exports = {
+     uploadFile
 }

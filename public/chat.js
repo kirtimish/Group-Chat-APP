@@ -275,9 +275,10 @@ const userId = localStorage.getItem('userId');
 
 
     function sendMedia() {
-      axios.post('http://18.234.127.40:3000/upload',{headers: { "Authorization": token }})
+      axios.post('http://18.234.127.40:3000/upload')
       .then(res => {
-        console.log(res.data.fileURL)
+        console.log(res)
+        alert('File uploaded to S3 successfully')
       })
       .catch((err) => {
         console.log(err);

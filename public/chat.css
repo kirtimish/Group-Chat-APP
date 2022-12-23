@@ -10,7 +10,7 @@
 
 html, body {
     
-    background-color: #2a4152;
+    background-color: #446949;
     overflow: hidden;
 }
 
@@ -196,11 +196,11 @@ html, body {
 .send-media-btn {
     color: #152733;
     background-color: rgb(48, 167, 247);
-    padding: 7px 10px;
+    padding: 5px;
     border-radius: 50%;
     cursor: pointer; 
     font-size: large;
-    font-weight: 600;
+    font-weight: 100;
 }
 
 .chat-span {
