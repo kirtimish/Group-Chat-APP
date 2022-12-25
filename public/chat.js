@@ -26,7 +26,7 @@ const userId = localStorage.getItem('userId');
       //event.preventDefault();
       try {
           const name = document.getElementById("create-group-input").value;
-      const res = await axios.post('http://18.234.127.40:3000/create-group', {name, isAdmin:true}, {headers: { "Authorization": token }});
+      const res = await axios.post('http://localhost:3000/create-group', {name, isAdmin:true}, {headers: { "Authorization": token }});
       //console.log('>>GrouP ID', res.data.group.id);
       const groupId = res.data.group.id;
       localStorage.setItem('groupId', groupId);
@@ -38,7 +38,7 @@ const userId = localStorage.getItem('userId');
     }
 
     axios
-  .get("http://18.234.127.40:3000/get-groups", {headers: { "Authorization": token }})
+  .get("http://localhost:3000/get-groups", {headers: { "Authorization": token }})
   .then((res) => {
     //getting groups
     const groupListDiv = document.getElementById("group-list");
@@ -83,7 +83,7 @@ const userId = localStorage.getItem('userId');
       console.log('***********', lastId)
        //setInterval(() => {
       axios
-        .get(`http://18.234.127.40:3000/get-chats?id=${lastId}&gId=${groupId}`, {headers: { "Authorization": token }})
+        .get(`http://localhost:3000/get-chats?id=${lastId}&gId=${groupId}`, {headers: { "Authorization": token }})
         .then((response) => {
           console.log('*******RESP', response)
         
@@ -121,7 +121,7 @@ const userId = localStorage.getItem('userId');
         };
         console.log(obj);
         axios
-          .post("http://18.234.127.40:3000/post-chat", obj, {headers: { "Authorization": token }})
+          .post("http://localhost:3000/post-chat", obj, {headers: { "Authorization": token }})
           .then((res) => console.log(res))
           .catch((err) => console.log(err));
         document.getElementById("group-chat-input").value = "";
@@ -149,7 +149,7 @@ const userId = localStorage.getItem('userId');
         console.log(gId)
         if (confirm("Are you sure?")) {
           axios
-            .delete(`http://18.234.127.40:3000/delete-group/${gId}`, {headers: { "Authorization": token }})
+            .delete(`http://localhost:3000/delete-group/${gId}`, {headers: { "Authorization": token }})
             .then((res) => {
               console.log(res.data);
               localStorage.removeItem("groupId");
@@ -163,7 +163,7 @@ const userId = localStorage.getItem('userId');
         document.getElementById('user-list').style.display = 'block';
         const gId= e.target.parentNode.id;
         axios
-          .get(`http://18.234.127.40:3000/get-users/?gId=${gId}`, {headers: { "Authorization": token }})
+          .get(`http://localhost:3000/get-users/?gId=${gId}`, {headers: { "Authorization": token }})
           .then((res) => {
             // console.log(res.data);
             document.getElementById("users-inside-group").innerHTML = "";
@@ -189,7 +189,7 @@ const userId = localStorage.getItem('userId');
         console.log(obj);
         if (confirm("Are you sure?")) {
           axios
-            .post("http://18.234.127.40:3000/remove-user", obj, {headers: { "Authorization": token }})
+            .post("http://localhost:3000/remove-user", obj, {headers: { "Authorization": token }})
             .then((res) => {
               console.log(res.data);
               alert(`user with ${obj.email} has been removed from the group`);
@@ -208,7 +208,7 @@ const userId = localStorage.getItem('userId');
         }
         // console.log(obj)
         axios
-          .post("http://18.234.127.40:3000/make-admin", obj, {headers: { "Authorization": token }})
+          .post("http://localhost:3000/make-admin", obj, {headers: { "Authorization": token }})
           .then((res) => {
             console.log(res);
           })
@@ -217,7 +217,7 @@ const userId = localStorage.getItem('userId');
 
       if (e.target.id === "add-user-btn") {
         axios
-    .get("http://18.234.127.40:3000/get-users", {headers: { "Authorization": token }})
+    .get("http://localhost:3000/get-users", {headers: { "Authorization": token }})
     .then((res) => {
       // getting users
       // console.log(res.data);
@@ -261,7 +261,7 @@ const userId = localStorage.getItem('userId');
       // console.log(obj);
       if (e.target.id === "add-user-btn") {
         axios
-          .post("http://18.234.127.40:3000/add-user", obj, {headers: { "Authorization": token }})
+          .post("http://localhost:3000/add-user", obj, {headers: { "Authorization": token }})
           .then((res) => {
             console.log(res.data);
             alert(`user with ${email} added to the group`);
@@ -275,7 +275,7 @@ const userId = localStorage.getItem('userId');
 
 
     function sendMedia() {
-      axios.post('http://18.234.127.40:3000/upload')
+      axios.post('http://localhost:3000/upload')
       .then(res => {
         console.log(res)
         alert('File uploaded to S3 successfully')

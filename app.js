@@ -13,11 +13,13 @@ const { serialize } = require('v8');
 const userRoutes = require('./routes/user');
 const groupRoutes = require('./routes/group');
 const chatRoutes = require('./routes/chat');
+const forgotPassRoutes = require('./routes/forgotPassword');
 //models
 const User = require('./models/user')
 const Chat = require('./models/chats')
 const Group = require('./models/group');
 const userGroup = require('./models/userGroup');
+const ForgotPassword = require('./models/forgotPassword');
 
 const app = express();
 
@@ -31,8 +33,12 @@ app.use(helmet());
 app.use('/user',userRoutes);
 app.use(groupRoutes);
 app.use(chatRoutes);
+app.use('/password',forgotPassRoutes)
 
 //associations
+User.hasMany(ForgotPassword);
+ForgotPassword.belongsTo(User);
+
 User.hasMany(Chat);
 Chat.belongsTo(User);
 
